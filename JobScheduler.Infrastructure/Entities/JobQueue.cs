@@ -35,4 +35,7 @@ public sealed class JobQueue
 
     [StringLength(128)]
     public string? LockedBy { get; set; }
+
+    [StringLength(500)]
+    public string? LastError { get; set; }
 }
