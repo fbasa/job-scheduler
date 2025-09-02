@@ -28,6 +28,7 @@ In visual studio -> tools -> options -> nuget package manager -> package source 
 ```dotnet ef database update -c JobSchedulerDbContext```
 
 ## auto update database when API starts DEV only
+```using var scope = app.Services.CreateScope();```  
 ```var db = scope.ServiceProvider.GetRequiredService<JobSchedulerDbContext>();```  
 ```db.Database.Migrate();```
 
