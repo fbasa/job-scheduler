@@ -45,7 +45,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE
 ## apply migration prod
 ```dotnet ef migrations script -i -o Migrations/Prod/2025-09-03_added_LastError_expand.sql```  
 -- -i makes it safe to run even if partially applied  
-This will generate script file that (review if needed) and manually execute in prod.
+This will generate script file (for your review) and manually execute in prod.
 
 ## prod deployment sequence
 In this case (adding LastError as a new column): run the DB script first, then deploy the app.  
