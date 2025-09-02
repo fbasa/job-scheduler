@@ -22,7 +22,10 @@ dotnet ef --version
 
 ## create migration 
 cd JobScheduler.Infrastructure
-
 dotnet ef migrations add InitialCreate -c JobSchedulerDbContext -o Migrations
 
+## manually update database
 dotnet ef database update -c JobSchedulerDbContext
+
+## auto update database when API starts DEV only
+```db.Database.Migrate();```
