@@ -20,17 +20,9 @@ dotnet tool update  --global dotnet-ef
 dotnet ef --version
 
 
-
-## create the initial migration (scaffolded locally for your exact environment)
+## create migration 
 cd JobScheduler.Infrastructure
 
-dotnet ef migrations add InitialCreate \
-  -p ./JobScheduler.Infrastructure \
-  -s ../JobScheduler.Api \
-  -c JobSchedulerDbContext \
-  -o Migrations
+dotnet ef migrations add InitialCreate -c JobSchedulerDbContext -o Migrations
 
-dotnet ef database update \
-  -p ./JobScheduler.Infrastructure \
-  -s ../JobScheduler.Api \
-  -c JobSchedulerDbContext
+dotnet ef database update -c JobSchedulerDbContext
