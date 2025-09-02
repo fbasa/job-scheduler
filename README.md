@@ -22,6 +22,7 @@ In visual studio -> tools -> options -> nuget package manager -> package source 
 ## create migration 
 ```cd JobScheduler.Infrastructure```  
 ```dotnet ef migrations add InitialCreate -c JobSchedulerDbContext -o Migrations```
+```dotnet ef migrations add added_LastError -c JobSchedulerDbContext -o Migrations```
 
 ## manually update database
 ```dotnet ef database update -c JobSchedulerDbContext```
