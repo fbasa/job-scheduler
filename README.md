@@ -58,18 +58,22 @@ Expand (DB) - run idempotent migration script to add LastError NULL.
 
 ## Squash plan (safe + repeatable)
 You can archive/squash your migrations and still be able to spin up brand-new environments from scratch. The pattern is to create a new "baseline" (squashed) migration that represents your current schema, and mark it as applied on existing databases (without running its Up)  
-1) Delete all migrations and snapshot.  
-2) ```dotnet ef migrations add 0001_Baseline```  
-      This produces a migration whose Up() creates the entire schema and a fresh ModelSnapshot. This becomes the only migration the app ships going forward.  
-3) Verify it really builds the whole DB (local) then run the API to auto-migrate.  
-4) Baseline existing databases (do NOT run Up() there)  
-   For prod/staging (already at your current schema), mark the new baseline as applied so EF won't try to run it:  
+
+0) Create separate branch so Migrations folder remain in git history.  
+1) Archive/Delete old migration files and snapshot.  
+2) Run migration command  
+      ```dotnet ef migrations add 0001_Baseline```  
+      This produces a migration whose Up() creates the entire schema and a fresh ModelSnapshot.  
+      This becomes the only migration the app ships going forward.  
+3) Verify it really builds the whole DB
+4) For prod/staging (already at your current schema), mark the new baseline as applied so EF won't try to run it:  
    ```IF NOT EXISTS (SELECT 1 FROM [__EFMigrationsHistory]```  
-               ```WHERE [MigrationId] = N'20250903_0001_Baseline')```  
+               ```WHERE [MigrationId] = N'20250903012652_0001_Baseline')```  
 ```BEGIN```  
     ```INSERT INTO [__EFMigrationsHistory] ([MigrationId],[ProductVersion])```  
-    ```VALUES (N'20250903_0001_Baseline', N'9.0.0');```  
+    ```VALUES (N'20250903012652_0001_Baseline', N'9.0.0');```  
 ```END```
+5) In dev/local (if already at your current schema do step 4) otherwise for new/fresh environment just run the API and it will auto-migrate.  
 
 Note*
 When doing baseline, do not include any new additional changes to existing state. Do it after steps 1 to 4 in a separate migration.  
