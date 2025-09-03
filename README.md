@@ -76,5 +76,5 @@ You can archive/squash your migrations and still be able to spin up brand-new en
 5) In dev/local (if already at your current schema do step 4) otherwise for new/fresh environment just run the API and it will auto-migrate.  
 
 Note*
-When doing baseline, do not include any new additional changes to existing state. Do it after steps 1 to 4 in a separate migration.  
+When doing a baseline, do not include any new additional changes to existing state. Do it after steps 1 to 4 AND in a separate migration.  
 
