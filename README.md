@@ -56,3 +56,18 @@ Old app versions ignore extra columns, so applying the "expand" migration early 
 Safe sequence (zero-downtime)  
 Expand (DB) - run idempotent migration script to add LastError NULL.  
 
+## Squash plan (safe + repeatable)
+You can archive/squash your migrations and still be able to spin up brand-new environments from scratch. The pattern is to create a new "baseline" (squashed) migration that represents your current schema, and mark it as applied on existing databases (without running its Up)  
+1) Delete all migrations and snapshot.
+2) ```dotnet ef migrations add 0001_Baseline```
+      This produces a migration whose Up() creates the entire schema and a fresh ModelSnapshot. This becomes the only migration the app ships going forward.
+3) Verify it really builds the whole DB (local) then run the API to auto-migrate.
+4) Baseline existing databases (do NOT run Up() there) 
+   For prod/staging (already at your current schema), mark the new baseline as applied so EF won't try to run it:
+   ```IF NOT EXISTS (SELECT 1 FROM [__EFMigrationsHistory]```
+               ```WHERE [MigrationId] = N'20250903_0001_Baseline')```
+```BEGIN```
+    ```INSERT INTO [__EFMigrationsHistory] ([MigrationId],[ProductVersion])```
+    ```VALUES (N'20250903_0001_Baseline', N'9.0.0');```
+```END```
+
