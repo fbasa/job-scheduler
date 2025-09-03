@@ -72,5 +72,5 @@ You can archive/squash your migrations and still be able to spin up brand-new en
 ```END```
 
 Note*
-When doing baseline, do not include any additional changes to existing state. Do it after steps 1 to 4.  
+When doing baseline, do not include any new additional changes to existing state. Do it after steps 1 to 4 in a separate migration.  
 
