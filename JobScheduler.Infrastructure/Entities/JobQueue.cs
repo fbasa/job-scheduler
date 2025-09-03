@@ -38,4 +38,7 @@ public sealed class JobQueue
 
     [StringLength(500)]
     public string? LastError { get; set; }
+
+    public DateTimeOffset? DispatchedAt { get; set; }
+
 }
