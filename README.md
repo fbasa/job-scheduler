@@ -70,6 +70,7 @@ You can archive/squash your migrations and still be able to spin up brand-new en
     ```INSERT INTO [__EFMigrationsHistory] ([MigrationId],[ProductVersion])```  
     ```VALUES (N'20250903_0001_Baseline', N'9.0.0');```  
 ```END```
+
 Note*
 When doing baseline, do not include any additional changes to existing state. Do it after steps 1 to 4.  
 
