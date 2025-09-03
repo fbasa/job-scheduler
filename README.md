@@ -62,7 +62,7 @@ You can archive/squash your migrations and still be able to spin up brand-new en
 0) Create separate branch so Migrations folder remain in git history.  
 1) Archive/Delete old migration files and snapshot.  
 2) Run migration command  
-      ```dotnet ef migrations add 0001_Baseline```  
+      ```dotnet ef migrations add 0001_Baseline -o Migrations```  
       This produces a migration whose Up() creates the entire schema and a fresh ModelSnapshot.  
       This becomes the only migration the app ships going forward.  
 3) Verify it really builds the whole DB
