@@ -71,7 +71,7 @@ You can archive/squash your migrations and still be able to spin up brand-new en
                ```WHERE [MigrationId] = N'20250903012652_0001_Baseline')```  
 ```BEGIN```  
     ```INSERT INTO [__EFMigrationsHistory] ([MigrationId],[ProductVersion])```  
-    ```VALUES (N'20250903012652_0001_Baseline', N'9.0.0');```  
+    ```VALUES (N'20250903012652_0001_Baseline', N'9.0.8');```  
 ```END```
 5) In dev/local (if already at your current schema do step 4) otherwise for new/fresh environment just run the API and it will auto-migrate.  
 
